@@ -1,16 +1,16 @@
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
 
 export function AmountField({ amount, onChange }) {
   const dispatch = useDispatch();
 
   function onChange(e) {
-    dispatch({ type: "amountChanged", payload: e.target.value });
+    dispatch({ type: 'rates/amountChanged', payload: e.target.value });
   }
   return (
-    <form className="ExchangeRate-form">
+    <form className='ExchangeRate-form'>
       <input
-        aria-label="Amount in base currency"
-        type="text"
+        aria-label='Amount in base currency'
+        type='text'
         value={amount}
         onChange={onChange}
       />
