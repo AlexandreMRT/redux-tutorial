@@ -4,6 +4,9 @@ import { ExchangeRate } from './components/ExchangeRate';
 import './style.css';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { getInitialRates } from './store/rates';
+
+store.dispatch(getInitialRates);
 
 ReactDOM.render(
   <Provider store={store}>
