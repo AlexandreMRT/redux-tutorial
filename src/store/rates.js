@@ -3,12 +3,11 @@ import { getExchangeRates } from '../api';
 const initialState = {
   amount: '10.00',
   currencyCode: 'USD',
-  currencyData: { USD: 1.0 },
+  currencyData: [{ code: 'USD', rates: 1.0 }],
   supportedCurrencies: ['USD', 'EUR', 'JPY', 'CAD', 'GBP', 'MXN'],
 };
 
 export function ratesReducer(state = initialState, action) {
-  console.log('action.type :>> ', action.type);
   switch (action.type) {
     case 'rates/amountChanged':
       return { ...state, amount: action.payload };
@@ -16,6 +15,10 @@ export function ratesReducer(state = initialState, action) {
       return { ...state, currencyCode: action.payload };
     case 'rates/ratesReceived': {
       const codes = Object.keys(action.payload).concat(state.currencyCode);
+      const currencyData = [];
+      for (let code in action.payload) {
+        currencyData.push({ code, rate: action.payload[code] });
+      }
       return {
         ...state,
         currencyData: action.payload,
